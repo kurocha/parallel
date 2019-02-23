@@ -52,13 +52,13 @@ namespace Parallel
 		
 		// This function is not re-entrant and must be called by the owner of the queue.
 		// It is designed this way because this queue is most useful and efficient in this configuration.
-		std::vector<ItemT> & dequeue()
+		const std::vector<ItemT> & dequeue()
 		{
 			{
 				std::lock_guard<std::mutex> lock(_lock);
 				
 				std::swap(_processing, _waiting);
-				_waiting->resize(0);
+				_waiting->clear();
 			}
 			
 			return *_processing;
