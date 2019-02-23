@@ -34,6 +34,15 @@ namespace Parallel
 			_waiting->push_back(item);
 		}
 		
+		// This function is thread-safe and re-entrant.
+		template <class ...Args>
+		void emplace(Args && ...args)
+		{
+			std::lock_guard<std::mutex> lock(_lock);
+			
+			_waiting->emplace_back(std::forward<Args>(args)...);
+		}
+		
 		void flush()
 		{
 			std::lock_guard<std::mutex> lock(_lock);
