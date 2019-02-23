@@ -27,7 +27,7 @@ namespace Parallel
 		}
 		
 		// This function is thread-safe and re-entrant.
-		void enqueue(ItemT item)
+		void enqueue(const ItemT & item)
 		{
 			std::lock_guard<std::mutex> lock(_lock);
 			
