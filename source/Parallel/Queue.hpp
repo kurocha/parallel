@@ -8,6 +8,9 @@
 
 #pragma once
 
+#include <vector>
+#include <mutex>
+
 namespace Parallel
 {
 	// Stream data from multiple writers to a single reader.
